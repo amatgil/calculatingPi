@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from numpy import pi
 
 
 def divBy4(n):
@@ -41,16 +42,25 @@ f = open("primes.json", "r")
 primes = f.read().rstrip().split(",")
 #######
 #Generate pi-s
-pies = []
-for prime in range(len(primes)):
-    pies.append(computePi(prime))
-print(pies)
+# pies = []
+# for prime in range(len(primes)):
+#     pies.append(computePi(prime))
+pies = [computePi(prime) for prime in range(len(primes)) ]
+
 #Generate nº of primes
 usedPrimes = [num for num in range(999)]
 print(pies)
 print(usedPrimes)
+
 #Plotting
-plt.plot([usedPrimes], [usedPrimes])
-plt.ylabel('Value')
-plt.xlabel('Number of primes')
+
+yMin = 3.09
+yMax = 3.21
+plt.axis(ymin=yMin, ymax=yMax)
+plt.plot(usedPrimes, pies, 'b-')
+plt.plot(usedPrimes, [pi]*999, 'r-')
+plt.xlabel('Calculated π')
+plt.ylabel('Number of primes used')
+# ax = plt.figure().add_subplot(111)
+# ax.plot(usedPrimes, pies, c='b', label='y1', linewidth=3)
 plt.show()
