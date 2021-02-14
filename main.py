@@ -36,7 +36,8 @@ def computePi(nOfPrimes):
 
     result = 2/(massiveProduct(finalFractions))
     return result
-    
+
+primes = [] 
 def isDivisble(a, b):
     if a%b == 0:
         return True
@@ -54,18 +55,16 @@ def isPrime(candidate):
 
 
 def computePrimes(maxPrime):
-    primes = []
     for i in range(1, maxPrime):
         if isPrime(i):     
             primes.append(i)
     return primes
 
-testPrimes = computePrimes(10000)
-print(testPrimes)
+primes = computePrimes(50000)
 ######
-f = open("primes.json", "r")
-    #rstrip() removing trailing \n
-primes = f.read().rstrip().split(",")
+# f = open("primes.json", "r")
+#     #rstrip() removing trailing \n
+# primes = f.read().rstrip().split(",")
 #######
 #Generate pi-s
 # pies = []
@@ -75,7 +74,7 @@ primes = f.read().rstrip().split(",")
 pies = [computePi(prime) for prime in range(len(primes))]
 
 #Generate nº of primes
-usedPrimes = [num for num in range(999)]
+usedPrimes = [num for num in range(len(primes))]
 
 #Plotting
 
@@ -83,7 +82,7 @@ yMin = 3.09
 yMax = 3.21
 plt.axis(ymin=yMin, ymax=yMax)
 plt.plot(usedPrimes, pies, 'b-')
-plt.plot(usedPrimes, [pi]*999, 'r-')
+plt.plot(usedPrimes, [pi]*len(primes), 'r-')
 plt.xlabel('Calculated π')
 plt.ylabel('Number of primes used')
 # ax = plt.figure().add_subplot(111)
