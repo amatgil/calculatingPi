@@ -45,12 +45,11 @@ primes = f.read().rstrip().split(",")
 # pies = []
 # for prime in range(len(primes)):
 #     pies.append(computePi(prime))
-pies = [computePi(prime) for prime in range(len(primes)) ]
+
+pies = [computePi(prime) for prime in range(len(primes))]
 
 #Generate nº of primes
 usedPrimes = [num for num in range(999)]
-print(pies)
-print(usedPrimes)
 
 #Plotting
 
