@@ -35,7 +35,6 @@ def computePi(nOfPrimes):
 
     result = 2/(massiveProduct(finalFractions))
     return result
-
 ######
 f = open("primes.json", "r")
     #rstrip() removing trailing \n
