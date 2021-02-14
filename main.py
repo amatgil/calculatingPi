@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from numpy import pi
+from math import ceil
 
 
 def divBy4(n):
@@ -36,6 +37,31 @@ def computePi(nOfPrimes):
     result = 2/(massiveProduct(finalFractions))
     return result
     
+def isDivisble(a, b):
+    if a%b == 0:
+        return True
+    else:
+        return False
+
+def isPrime(candidate):
+    if candidate < 4:
+        return True
+    y = ceil(candidate**(1/2))
+    for i in range(2, int(y)+1):
+        if isDivisble(candidate, i):
+            return False
+    return True
+
+
+def computePrimes(maxPrime):
+    primes = []
+    for i in range(1, maxPrime):
+        if isPrime(i):     
+            primes.append(i)
+    return primes
+
+testPrimes = computePrimes(10000)
+print(testPrimes)
 ######
 f = open("primes.json", "r")
     #rstrip() removing trailing \n
