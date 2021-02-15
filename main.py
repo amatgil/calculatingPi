@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 from numpy import pi
 from math import ceil
-
+import concurrent.futures
+import threading
 
 def divBy4(n):
     if ((n-1) % 4 == 0):
@@ -36,8 +37,7 @@ def computePi(nOfPrimes):
 
     result = 2/(massiveProduct(finalFractions))
     return result
-
-primes = [] 
+    
 def isDivisble(a, b):
     if a%b == 0:
         return True
@@ -54,30 +54,34 @@ def isPrime(candidate):
     return True
 
 
-def computePrimes(maxPrime):
-    for i in range(1, maxPrime):
-        if isPrime(i):     
+def computePrimes(minPrime, maxPrime, thread):
+    print(f"Started calculating thread {thread}")
+    primes = []
+    for i in range(minPrime, maxPrime):
+        if isPrime(i):   
+            print(i)  
             primes.append(i)
     return primes
 
-primes = computePrimes(50000)
-######
-# f = open("primes.json", "r")
-#     #rstrip() removing trailing \n
-# primes = f.read().rstrip().split(",")
-#######
-#Generate pi-s
-# pies = []
-# for prime in range(len(primes)):
-#     pies.append(computePi(prime))
+primes = []
+# with concurrent.futures.ThreadPoolExecutor() as executor:
+#     primes.append(computePrimes(3, 25000, 1))
+#     primes.append(computePrimes(25000, 50000, 2))
+#     primes.append(computePrimes(50000, 75000,3))
+prim1 = threading.Thread(target=computePrimes(3, 25000, 1))
+prim2 = threading.Thread(target=computePrimes(25000, 50000, 2))
+primes.append(prim1)
+primes.append(prim2)
+
+#Compress list of lists into list
+primes = [item for list in primes for item in list]
 
 pies = [computePi(prime) for prime in range(len(primes))]
 
-#Generate nº of primes
 usedPrimes = [num for num in range(len(primes))]
 
-#Plotting
 
+#Plotting
 yMin = 3.09
 yMax = 3.21
 plt.axis(ymin=yMin, ymax=yMax)
@@ -85,6 +89,4 @@ plt.plot(usedPrimes, pies, 'b-')
 plt.plot(usedPrimes, [pi]*len(primes), 'r-')
 plt.xlabel('Calculated π')
 plt.ylabel('Number of primes used')
-# ax = plt.figure().add_subplot(111)
-# ax.plot(usedPrimes, pies, c='b', label='y1', linewidth=3)
 plt.show()
