@@ -63,15 +63,15 @@ def computePrimes(minPrime, maxPrime, thread):
             primes.append(i)
     return primes
 
-primes = []
+primes = [] 
 # with concurrent.futures.ThreadPoolExecutor() as executor:
 #     primes.append(computePrimes(3, 25000, 1))
 #     primes.append(computePrimes(25000, 50000, 2))
 #     primes.append(computePrimes(50000, 75000,3))
 prim1 = threading.Thread(target=computePrimes(3, 25000, 1))
 prim2 = threading.Thread(target=computePrimes(25000, 50000, 2))
-primes.append(prim1)
-primes.append(prim2)
+prim1.start()
+prim2.start()
 
 #Compress list of lists into list
 primes = [item for list in primes for item in list]
