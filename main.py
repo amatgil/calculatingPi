@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from numpy import pi
 from math import ceil
 import sys
+import datetime
 
 def divBy4(n):
     if ((n-1) % 4 == 0):
@@ -80,7 +81,10 @@ except ValueError:
     print("Error: Tria un enter positiu si us plau")
     exit()
 
+
+begin_time = datetime.datetime.now()
 fprimes = computePrimes(userInt)
+print(f"Time taken to calculate pi-es: {datetime.datetime.now() - begin_time}")
 
 
 pies = [computePi(prime) for prime in range(len(fprimes))]
@@ -88,6 +92,7 @@ pies = [computePi(prime) for prime in range(len(fprimes))]
 usedPrimes = [num for num in range(len(fprimes))]
 
 
+begin_time2 = datetime.datetime.now()
 #Plotting
 yMin = 3.09
 yMax = 3.21
@@ -96,4 +101,7 @@ plt.plot(usedPrimes, pies, 'b-')
 plt.plot(usedPrimes, [pi]*len(primes), 'r-')
 plt.ylabel('Calculated π')
 plt.xlabel('Number of primes used')
+print(f"Time taken to plot chart: {datetime.datetime.now() - begin_time2}")
+begin_time3 = datetime.datetime.now()
 plt.show()
+print(f"Time taken to plt.show: {datetime.datetime.now() - begin_time3}")
