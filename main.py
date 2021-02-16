@@ -73,8 +73,19 @@ def computePrimes(maxPrime):
             primes.append(i)
     return primes
 
+def summary(array, separation):
+    output = []
+    for num in range(len(array)):
+        if num % separation == 0:
+            output.append(array[num])
+    return output
 
-userInput = sys.argv[1]
+
+# userInput = sys.argv[1]
+userInput = 150000
+# separation = sys,argv[2]
+separation = 100
+
 try:
     userInt = int(userInput) 
 except ValueError:
@@ -87,18 +98,20 @@ fprimes = computePrimes(userInt)
 print(f"Time taken to calculate pi-es: {datetime.datetime.now() - begin_time}")
 
 
-pies = [computePi(prime) for prime in range(len(fprimes))]
+pies0 = [computePi(prime) for prime in range(len(fprimes))]
 
-usedPrimes = [num for num in range(len(fprimes))]
+usedPrimes0 = [num for num in range(len(fprimes))]
 
+usedPrimes = summary(usedPrimes0, separation)
 
+pies = summary(pies0, separation)
 begin_time2 = datetime.datetime.now()
 #Plotting
 yMin = 3.09
 yMax = 3.21
 plt.axis(ymin=yMin, ymax=yMax)
 plt.plot(usedPrimes, pies, 'b-')
-plt.plot(usedPrimes, [pi]*len(primes), 'r-')
+plt.plot(usedPrimes, [pi]*len(usedPrimes), 'r-')
 plt.ylabel('Calculated π')
 plt.xlabel('Number of primes used')
 print(f"Time taken to plot chart: {datetime.datetime.now() - begin_time2}")
