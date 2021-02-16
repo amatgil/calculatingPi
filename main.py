@@ -15,8 +15,8 @@ def massiveProduct(list):
     for i in list:
         output = output*i
     return output
+
 def computePi(nOfPrimes):
-    
     fractions = []
     #Define Fractions
     for prime in primes:
@@ -44,41 +44,40 @@ def isDivisble(a, b):
     else:
         return False
 
+
 def isPrime(candidate):
-    if candidate < 4:
+    global primes
+    if candidate == 0:
+        return False
+    elif candidate < 4:
         return True
-    y = ceil(candidate**(1/2))
-    for i in range(2, int(y)+1):
-        if isDivisble(candidate, i):
-            return False
-    return True
+    else: 
+        sqrtN = ceil(candidate**(1/2))
+        for i in primes:
+            if sqrtN < i:
+                return True
+            elif i == 1:
+                continue
+            elif isDivisble(candidate, i):
+                return False
+        return True
 
 
-def computePrimes(minPrime, maxPrime, thread):
-    print(f"Started calculating thread {thread}")
+def computePrimes(maxPrime):
+    global primes
     primes = []
-    for i in range(minPrime, maxPrime):
+    for i in range(maxPrime):
         if isPrime(i):   
             print(i)  
             primes.append(i)
     return primes
 
-primes = [] 
-# with concurrent.futures.ThreadPoolExecutor() as executor:
-#     primes.append(computePrimes(3, 25000, 1))
-#     primes.append(computePrimes(25000, 50000, 2))
-#     primes.append(computePrimes(50000, 75000,3))
-prim1 = threading.Thread(target=computePrimes(3, 25000, 1))
-prim2 = threading.Thread(target=computePrimes(25000, 50000, 2))
-prim1.start()
-prim2.start()
+fprimes = computePrimes(50000)
 
-#Compress list of lists into list
-primes = [item for list in primes for item in list]
 
-pies = [computePi(prime) for prime in range(len(primes))]
+pies = [computePi(prime) for prime in range(len(fprimes))]
 
-usedPrimes = [num for num in range(len(primes))]
+usedPrimes = [num for num in range(len(fprimes))]
 
 
 #Plotting
