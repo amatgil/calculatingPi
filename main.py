@@ -36,7 +36,7 @@ def computePi(nOfPrimes):
         finalFractions.append(newFraction)
 
     result = 2/(massiveProduct(finalFractions))
-    print(result + "\n")
+    print(str(result) + "\n")
     return result
     
 def isDivisble(a, b):
@@ -94,6 +94,6 @@ yMax = 3.21
 plt.axis(ymin=yMin, ymax=yMax)
 plt.plot(usedPrimes, pies, 'b-')
 plt.plot(usedPrimes, [pi]*len(primes), 'r-')
-plt.xlabel('Calculated π')
-plt.ylabel('Number of primes used')
+plt.ylabel('Calculated π')
+plt.xlabel('Number of primes used')
 plt.show()
