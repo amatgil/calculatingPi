@@ -1,8 +1,8 @@
+#!/usr/bin/python
 import matplotlib.pyplot as plt
 from numpy import pi
 from math import ceil
-import concurrent.futures
-import threading
+import sys
 
 def divBy4(n):
     if ((n-1) % 4 == 0):
@@ -67,12 +67,19 @@ def computePrimes(maxPrime):
     global primes
     primes = []
     for i in range(maxPrime):
-        if isPrime(i):   
-            print(i)  
+        if isPrime(i):
             primes.append(i)
     return primes
 
-fprimes = computePrimes(50000)
+
+userInput = sys.argv[1]
+try:
+    userInt = int(userInput) 
+except ValueError:
+    print("Error: Tria un enter positiu si us plau")
+    exit()
+
+fprimes = computePrimes(userInt)
 
 
 pies = [computePi(prime) for prime in range(len(fprimes))]
