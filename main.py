@@ -36,6 +36,7 @@ def computePi(nOfPrimes):
         finalFractions.append(newFraction)
 
     result = 2/(massiveProduct(finalFractions))
+    print(result + "\n")
     return result
     
 def isDivisble(a, b):
