@@ -97,3 +97,4 @@ plt.plot(usedPrimes, [pi]*len(primes), 'r-')
 plt.ylabel('Calculated π')
 plt.xlabel('Number of primes used')
 plt.show()
+
